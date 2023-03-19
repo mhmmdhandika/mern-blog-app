@@ -14,7 +14,7 @@ function Post({ _id, img, title, author, summary, createdAt }: PostTypes) {
   const hostAPI = import.meta.env.VITE_HOST_API;
 
   return (
-    <article className='grid h-[10rem] grid-cols-2 grid-rows-1 gap-3 overflow-hidden border-2'>
+    <article className='grid h-[11rem] grid-cols-[1fr,_2fr] grid-rows-1 gap-3 overflow-hidden border-2'>
       <Link to={`/blog/post/${_id}`} className='h-[15rem] w-full bg-slate-300'>
         <img
           src={`${hostAPI}/${img}`}
