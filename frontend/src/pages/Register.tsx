@@ -3,6 +3,7 @@ import type { FormEvent } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
+import Toast from '../components/Toast';
 
 function Register() {
   const hostAPI = import.meta.env.VITE_HOST_API;
@@ -32,6 +33,11 @@ function Register() {
     if (response.ok) {
       // store user data to user context
       setUserInfo(data);
+      // show alert
+      Toast.fire({
+        icon: 'success',
+        title: 'Register successfully',
+      });
       // if successfully redirect to home page
       navigate('/');
     } else {
