@@ -64,10 +64,4 @@ app.use('/user', userRoutes);
 // blog routes
 app.use('/blog', blogRoutes);
 
-// static files (build of your frontend)
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend', 'dist')));
-  app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend', 'dist', 'index.html'));
-  });
-}
+module.exports = app;
