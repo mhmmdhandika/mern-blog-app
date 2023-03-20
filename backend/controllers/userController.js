@@ -130,7 +130,12 @@ const user_login = async (req, res) => {
 const user_profile = (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, secretKey, {}, (err, info) => {
-    if (err) throw err;
+    if (err) {
+      res.status(401).json({
+        message: 'Unauthorized activity',
+      });
+      return;
+    }
     res.json(info);
   });
 };

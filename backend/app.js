@@ -8,6 +8,8 @@ const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/userRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 
+const MONGODB_URI = process.env.MONGODB_URI;
+
 // handle cors
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
 
@@ -32,7 +34,7 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
 
 // connect to db
 mongoose
-  .connect('mongodb://127.0.0.1:27017/', {
+  .connect(MONGODB_URI, {
     dbName: 'blog',
     useNewUrlParser: true,
     useUnifiedTopology: true,

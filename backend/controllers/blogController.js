@@ -17,7 +17,12 @@ const blog_create = async (req, res) => {
   const { token } = req.cookies;
 
   jwt.verify(token, secretKey, {}, async (err, info) => {
-    if (err) throw err;
+    if (err) {
+      res.status(401).json({
+        message: 'Unauthorized activity',
+      });
+      return;
+    }
     const { title, content } = req.body;
 
     const postDoc = await BlogModel.create({
