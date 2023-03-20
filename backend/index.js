@@ -13,6 +13,7 @@ const MONGODB_URI = process.env.MONGODB_URI;
 const PORT = process.env.PORT;
 
 // handle cors
+// FIXME:
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
 
 // control headers
@@ -54,9 +55,15 @@ mongoose
   });
 
 // user routes
-app.use('/api/user', userRoutes);
+app.use('/user', userRoutes);
 
 // blog routes
-app.use('/api/blog', blogRoutes);
+app.use('/blog', blogRoutes);
 
-module.exports = app;
+// static files (build of your frontend)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend', 'dist')));
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend', 'dist', 'index.html'));
+  });
+}
