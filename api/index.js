@@ -54,9 +54,9 @@ mongoose
   });
 
 // user routes
-app.use('/user', userRoutes);
+app.use('/api/user', userRoutes);
 
 // blog routes
-app.use('/blog', blogRoutes);
+app.use('/api/blog', blogRoutes);
 
 module.exports = app;
