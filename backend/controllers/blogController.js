@@ -78,9 +78,25 @@ const blog_edit = async (req, res) => {
   });
 };
 
+// delete a blog
+const blog_delete = async (req, res) => {
+  const { id } = req.body;
+
+  try {
+    await BlogModel.deleteOne({ _id: id });
+    res.json({ message: 'Delete Successfully!' });
+  } catch (e) {
+    res.status(400).json({
+      name: e.name,
+      message: e.message,
+    });
+  }
+};
+
 module.exports = {
   blog_create,
   blog_posts,
   blog_post,
   blog_edit,
+  blog_delete,
 };

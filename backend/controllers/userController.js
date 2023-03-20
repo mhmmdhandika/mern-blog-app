@@ -15,6 +15,7 @@ const user_register = async (req, res) => {
   const { name, username, password } = req.body;
 
   // check name letters only
+  // return bool
   const isNameLettersOnly = /^[a-z]+$/i.test(name);
 
   if (!isNameLettersOnly) {
