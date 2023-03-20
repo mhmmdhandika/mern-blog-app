@@ -132,7 +132,7 @@ function PostPage() {
       )}
       <div className='my-4 h-[20rem] bg-slate-300'>
         <img
-          src={`http://localhost:4000/${post?.cover}`}
+          src={`${hostAPI}/${post?.cover}`}
           alt={post?.title}
           className='h-full w-full object-cover'
         />
