@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useContext } from 'react';
 import { UserContext } from '../context/UserContext';
+import Toast from './Toast';
 
 function Navbar() {
   const hostAPI = import.meta.env.VITE_HOST_API;
@@ -27,6 +28,11 @@ function Navbar() {
     });
     // reset user info
     setUserInfo(null);
+    // show alert
+    Toast.fire({
+      icon: 'success',
+      title: 'Logout successfully',
+    });
     // redirect to home
     navigate('/');
   };
