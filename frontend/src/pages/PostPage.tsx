@@ -1,10 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { UserContext } from '../context/UserContext';
+import Toast from '../components/Toast';
 
 function PostPage() {
   const hostAPI = import.meta.env.VITE_HOST_API;
+
+  const navigate = useNavigate();
 
   const { userInfo } = useContext(UserContext);
 
@@ -23,21 +26,21 @@ function PostPage() {
     updatedAt: string;
   } | null>(null);
 
-  // get an id from the post
+  // get a post's id from url params
   const { id } = useParams();
 
   const handleDelete = async () => {
-    const confirm = Swal.fire({
+    const confirmUser = Swal.fire({
       title: 'You sure?',
       text: 'Are you sure want to delete this blog?',
       icon: 'warning',
       showCancelButton: true,
     });
 
-    const response = await confirm;
+    const responseUser = await confirmUser;
 
     // if user is sure to delete a blog
-    if (response.isConfirmed) {
+    if (responseUser.isConfirmed) {
       fetch(`${hostAPI}/blog/post`, {
         method: 'DELETE',
         headers: {
@@ -46,7 +49,22 @@ function PostPage() {
         },
         body: JSON.stringify({ id }),
         credentials: 'include',
-      });
+      })
+        .then(response => response.json())
+        .then(data => {
+          Toast.fire({
+            icon: 'success',
+            title: data.message,
+          });
+          navigate('/');
+        })
+        .catch(e => {
+          Swal.fire({
+            text: e.message,
+            icon: 'error',
+            timer: 5000,
+          });
+        });
     }
   };
 
