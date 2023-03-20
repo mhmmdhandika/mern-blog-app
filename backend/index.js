@@ -26,6 +26,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  res.json({ result: 'ok' });
+});
+
 // body parser
 app.use(express.json());
 
