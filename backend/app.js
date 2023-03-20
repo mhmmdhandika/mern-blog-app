@@ -58,3 +58,5 @@ app.use('/user', userRoutes);
 
 // blog routes
 app.use('/blog', blogRoutes);
+
+module.exports = app;
