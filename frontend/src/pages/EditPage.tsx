@@ -46,7 +46,7 @@ function EditPage() {
       body: data,
       credentials: 'include',
     });
-    if (response.ok) navigate(`/post/${id}`);
+    if (response.ok) navigate(`/blog/post/${id}`);
   };
 
   return (
