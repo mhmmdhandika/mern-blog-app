@@ -15,7 +15,6 @@ const PORT = process.env.PORT;
 const HOST = process.env.HOST;
 
 // handle cors
-// FIXME:
 app.use(cors({ credentials: true, origin: HOST }));
 
 // control headers
