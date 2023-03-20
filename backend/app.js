@@ -10,6 +10,8 @@ const blogRoutes = require('./routes/blogRoutes');
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
+const PORT = process.env.PORT;
+
 // handle cors
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
 
@@ -40,10 +42,12 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    // listening port
-    app.listen(4000, () => {
-      console.log(`Server is listening on port 4000`);
-    });
+    if (PORT) {
+      // listening port
+      app.listen(PORT, () => {
+        console.log(`Server is listening on port 4000`);
+      });
+    }
   })
   .catch(err => {
     console.log(err);
