@@ -52,6 +52,7 @@ const blog_post = async (req, res) => {
 // edit a blog
 const blog_edit = async (req, res) => {
   let newPath = null;
+
   if (req.file) {
     const { originalname, path } = req.file;
     const parts = originalname.split('.');
@@ -66,9 +67,11 @@ const blog_edit = async (req, res) => {
     const { id, title, content } = req.body;
     const post = await BlogModel.findById(id);
     const isAuthor = JSON.stringify(post.author) === JSON.stringify(info.id);
+
     if (!isAuthor) {
       return res.status(400).json('You are not the author');
     }
+
     await post.updateOne({
       title,
       content,
@@ -80,17 +83,25 @@ const blog_edit = async (req, res) => {
 
 // delete a blog
 const blog_delete = async (req, res) => {
-  const { id } = req.body;
+  const { token } = req.cookies;
+  jwt.verify(token, secretKey, {}, async (err, info) => {
+    if (err) {
+      return res.status(401).json({
+        message: 'Unauthorized activity',
+      });
+    }
 
-  try {
-    await BlogModel.deleteOne({ _id: id });
-    res.json({ message: 'Delete Successfully!' });
-  } catch (e) {
-    res.status(400).json({
-      name: e.name,
-      message: e.message,
-    });
-  }
+    const { id } = req.body;
+
+    try {
+      await BlogModel.deleteOne({ _id: id });
+      res.json({ message: 'Delete Successfully!' });
+    } catch (e) {
+      res.status(400).json({
+        message: e.message,
+      });
+    }
+  });
 };
 
 module.exports = {
