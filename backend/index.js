@@ -12,9 +12,11 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 const PORT = process.env.PORT;
 
+const HOST = process.env.HOST;
+
 // handle cors
 // FIXME:
-app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
+app.use(cors({ credentials: true, origin: HOST }));
 
 // control headers
 app.use((req, res, next) => {
