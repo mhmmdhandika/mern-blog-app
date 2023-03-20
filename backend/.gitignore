@@ -16,5 +16,8 @@ benchmarks/graphs
 # upload static files
 uploads/*
 
-#environment variables
+# environment variables
 .env
+.env.example
+.env.local
+.env.staging
