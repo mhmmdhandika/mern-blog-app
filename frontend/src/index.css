@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: 'Merriweather', serif;
+}
+
+.section-space {
+  @apply mx-auto max-w-[1000px] px-3;
+}
+
+.btn-primary {
+  @apply bg-slate-500 text-white;
+}
+
+/* form auth */
+.auth-title {
+  @apply text-center text-2xl font-medium;
+}
+
+.auth-input {
+  @apply border-2 border-slate-400 px-3 py-1;
+}
+
+.auth-submit {
+  @apply btn-primary py-1 font-semibold;
+}
+/* end form auth */
+
+/* post form */
+.post-form-input {
+  @apply border border-gray-400/60 px-3 py-1;
+}
+/* end post form */
